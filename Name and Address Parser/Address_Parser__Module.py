@@ -32,6 +32,7 @@ def Address_Parser(Address_4CAF50,Progress,TruthSet=""):
     FishBone=""
     Detailed_Report=""
     Mask_log={}
+    Unique_Mask={}
     Address_4CAF50=open(Address_4CAF50,"r",encoding='utf8')
     file_name = os.path.splitext(os.path.basename(Address_4CAF50.name))[0]
     Lines = Address_4CAF50.readlines()
@@ -160,6 +161,7 @@ def Address_Parser(Address_4CAF50,Progress,TruthSet=""):
             
         Mask_1=",".join(Mask)
         Mask_log[ID]=Mask_1
+        Unique_Mask[Mask_1]=ID
         FirstPhaseList = [FirstPhaseList[b] for b in range(len(FirstPhaseList)) if FirstPhaseList[b] != ","]
        
         Found=False
@@ -391,6 +393,7 @@ def Address_Parser(Address_4CAF50,Progress,TruthSet=""):
         Detailed_Report+=str(RuleBasedRes)
         # Detailed_Report+="List of Exception Mask(s): -\t\n\n"+Exception_Mask+"--"
         Detailed_Report_1="\nTotal Number of Addresses: -\t"+"{:,}".format(Total)+"\n"
+        Detailed_Report_1+="\nUnique Pattern Count: -\t"+"{:,}".format(len(Unique_Mask))+"\n"
         Detailed_Report_1+="\nNumber of Pattern Parsed Addresses: -\t"+"{:,}".format(Observation)+"\n"
         Detailed_Report_1+="Percentage of Patterns Parsed Result:  -\t"+"{:.2f}%".format(float(percentage))+"\n"
         Detailed_Report_1+="\nNumber of Exceptions Thrown: -\t\t"+"{:,}".format(Total-Observation)+"\n"
